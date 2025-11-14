@@ -4,7 +4,7 @@
 
 	<groupId>io.github.shmilyhe</groupId>
 	<artifactId>json-convert</artifactId>
-	<version>3.1.4</version>
+	<version>3.1.5</version>
 	<packaging>jar</packaging>
 	<description>json-convert</description>
 	<name>io.github.shmilyhe:json-convert</name>
@@ -18,10 +18,10 @@
 	</properties>
 	<licenses>
 		<license>
-			<name>GNU General Public License v2.0</name>
-			<url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt</url>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
 			<distribution>repo</distribution>
-			<comments>GNU General Public License v2.0</comments>
+			<comments>MIT License</comments>
 		</license>
 	</licenses>
 	<developers>
@@ -59,13 +59,17 @@
 	</dependencies>
 	<distributionManagement>
 		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+			<id>central</id>
+			<url>https://central.sonatype.com/api/v1/publisher/deployments/upload/</url>
 		</snapshotRepository>
+		<!--<repository>
+			<id>central</id>
+			<url>https://central.sonatype.com/api/v1/publisher/deployments/upload/</url>
+		</repository>-->
 		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
+			<id>central</id>
+			<url>https://central.sonatype.com/api/v1/publisher</url>
+    	</repository>
 	</distributionManagement>
 
 	<build>
@@ -92,13 +96,7 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>io.shmilyhe.cli.App</mainClass>
-						</manifest>
-					</archive>
+					
 				</configuration>
 			</plugin>
 			<plugin>
@@ -115,18 +113,24 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>3.6.3</version>
+						<configuration>
+							<!-- Specify the javadoc executable path -->
+							<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+							<!-- Or skip javadoc generation if not needed -->
+							<!-- <skip>true</skip> -->
+						</configuration>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
 		</plugins>
 	</build>
 	<profiles>
@@ -134,15 +138,15 @@
 			<id>release</id>
 			<build>
 				<plugins>
+				
 					<plugin>
-						<groupId>org.sonatype.plugins</groupId>
-						<artifactId>nexus-staging-maven-plugin</artifactId>
-						<version>1.6.3</version>
+						<groupId>org.sonatype.central</groupId>
+						<artifactId>central-publishing-maven-plugin</artifactId>
+						<version>0.4.0</version>
 						<extensions>true</extensions>
 						<configuration>
-							<serverId>ossrh</serverId>
-							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
-							<autoReleaseAfterClose>true</autoReleaseAfterClose>
+							<publishingServerId>central</publishingServerId>
+							<tokenAuth>true</tokenAuth>   <!-- 使用 token 而非账号密码 -->
 						</configuration>
 					</plugin>
 					<plugin>
@@ -165,7 +169,7 @@
 							<target>1.8</target>
 						</configuration>
 					</plugin>
-					<plugin>
+					<!--<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
 						<version>1.5</version>
@@ -178,7 +182,21 @@
 								</goals>
 							</execution>
 						</executions>
-					</plugin>
+					</plugin>-->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>3.0.1</version>
+						<executions>
+							<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+							</execution>
+						</executions>
+						</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
@@ -195,7 +213,13 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.9</version>
+						<version>3.6.3</version>
+						<configuration>
+							<!-- Specify the javadoc executable path -->
+							<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+							<!-- Or skip javadoc generation if not needed -->
+							<!-- <skip>true</skip> -->
+						</configuration>
 						<executions>
 							<execution>
 								<id>attach-javadocs</id>
