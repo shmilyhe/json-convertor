@@ -15,6 +15,7 @@ import io.shmilyhe.convert.impl.Remove;
 import io.shmilyhe.convert.impl.Setter;
 import io.shmilyhe.convert.tools.JBean;
 import io.shmilyhe.convert.tools.JsonString;
+import io.shmilyhe.convert.tools.MapToEntityConverter;
 import io.shmilyhe.convert.tools.SimpleJson;
 import io.shmilyhe.convert.tools.StringValue;
 /**
@@ -209,7 +210,8 @@ public class Json {
      */
     public <T> T asBean(Class<T> t){
         try {
-            return (T) JBean.mapToBean((Map)raw, t.newInstance());
+            //return (T) JBean.mapToBean((Map)raw, t.newInstance());
+           return (T) MapToEntityConverter.mapToEntity((Map)raw, t);
         } catch (Exception e) {
             e.printStackTrace();
         }
