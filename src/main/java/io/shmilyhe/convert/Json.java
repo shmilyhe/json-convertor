@@ -13,7 +13,6 @@ import io.shmilyhe.convert.api.ISet;
 import io.shmilyhe.convert.impl.Getter;
 import io.shmilyhe.convert.impl.Remove;
 import io.shmilyhe.convert.impl.Setter;
-import io.shmilyhe.convert.tools.JBean;
 import io.shmilyhe.convert.tools.JsonString;
 import io.shmilyhe.convert.tools.MapToEntityConverter;
 import io.shmilyhe.convert.tools.SimpleJson;
