@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import io.shmilyhe.convert.api.IGet;
 import io.shmilyhe.convert.log.Log;
 import io.shmilyhe.convert.log.api.Logger;
-import io.shmilyhe.convert.tools.DEBUG;
 import io.shmilyhe.convert.tools.ExpEnv;
 
 /**
@@ -168,6 +167,11 @@ public class ExpGeter implements IGet{
     }
 
     public static Object bitOp(Object num1, Object num2,OperatorType op){
+        if(op.equals(OperatorType.BIT_OR)){
+            if(num1==null&&num2!=null)return num2;
+            if(num1 instanceof String )return num1;
+        }
+        
         if(num1==null||num2==null)return 0;
         if(num1 instanceof Long||num2 instanceof Long){
             long n1=getLong(num1);

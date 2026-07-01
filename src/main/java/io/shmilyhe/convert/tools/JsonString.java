@@ -12,6 +12,14 @@ import java.util.Date;
 import java.util.Map;
 
 public class JsonString {
+    private static boolean SUPPORT_JAVA_TIME;
+    static{
+        try {
+            Class.forName("java.time.LocalDateTime");
+            SUPPORT_JAVA_TIME=true;
+        } catch (Exception e) {
+        }
+    }
     // 静态方法入口
     public static String asJsonString(Object o) {
         StringBuilder json = new StringBuilder();
@@ -44,10 +52,10 @@ public class JsonString {
             json.append('"').append(o).append('"');
         } else if (o instanceof Date) {
             json.append('"').append(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(o)).append('"');
-        } else if (o instanceof LocalDateTime) {
+        } else if (SUPPORT_JAVA_TIME && o instanceof LocalDateTime) {
             LocalDateTime lt = (LocalDateTime) o;
             json.append('"').append(lt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append('"');
-        } else if (o instanceof LocalDate) {
+        } else if (SUPPORT_JAVA_TIME && o instanceof LocalDate) {
             LocalDate ld = (LocalDate) o;
             json.append('"').append(ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))).append('"');
         } else if (o.getClass().isArray()) {
@@ -172,4 +180,3 @@ public class JsonString {
         }
     }
 }
-

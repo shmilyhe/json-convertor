@@ -7,7 +7,7 @@
 
 
 
-另外这个组件还提供了一个简单高效的[JSON组件，请点击这里](json.md "JSON组件")
+另外这个组件还提供了一个简单高效的[JSON组件，请点击这里](json.md "JSON组件")，以及支持 Java POJO 操作的[VRL脚本执行器，请点击这里](VRLExecutor.md "VRLExecutor")
 
 ## mvn 引入
 ```

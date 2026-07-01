@@ -1,0 +1,6 @@
+.name=name|"eric"
+.active=true
+.age=age
+.info.title="manager"
+.info.abc="test"
+.info.position=position

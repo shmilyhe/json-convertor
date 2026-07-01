@@ -7,7 +7,7 @@ public class TestMupJsonConvertor{
 
     public static void main(String []args){
         String json =ResourceReader.read("testfile/test1.json");
-        String commands =ResourceReader.read("testfile/test1.script");
+        //String commands =ResourceReader.read("testfile/test1.script");
         Object data =JsonConvertor.toData(json);
         JsonConvertor[] jcs = new JsonConvertor[]{
             new JsonConvertor(ResourceReader.read("testfile/test1.script")),

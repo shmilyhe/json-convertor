@@ -17,7 +17,7 @@ public class Setter implements ISet{
     IDataAccess da;
     boolean self=false;
     boolean isVar=false;
-   
+    private String exp;
 
 
     /**
@@ -27,6 +27,7 @@ public class Setter implements ISet{
     public Setter(String ext){
         if(ext==null||ext.trim().length()==0)self=true;
         ExpPartVo vo =  TokenizeExpress.tokenize(ext);
+        exp=ext;
         for(;vo!=null;vo=vo.getNext()){
             IDataAccess ida =null;
             if(vo.getType()==0){
@@ -71,12 +72,14 @@ public class Setter implements ISet{
             }else if(d instanceof List){
                 isContainer=true;
             }
-            if(d==null||!isContainer){
+            if(d==null){
                 d=flag.create();
                 if(!flag.set(d, b)){
                     b=flag.create();
                     last.set(d, lastO);
                 }
+            }else {
+                flag.set(d, b);
             }
             b=d;
             last=flag;

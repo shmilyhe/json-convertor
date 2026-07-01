@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.shmilyhe.convert.tools.ReflectionUtils;
+
 
 public class MapDataAccess extends BaseDataAccess{
     private boolean array;
@@ -19,8 +21,10 @@ public class MapDataAccess extends BaseDataAccess{
         if(da instanceof Map){
             ((Map)da).put(key, v);
             return true;
+        }else{
+            return ReflectionUtils.set(da, key, v);
         }
-        return false;
+        //return false;
     }
 
     @Override
@@ -28,8 +32,10 @@ public class MapDataAccess extends BaseDataAccess{
         //System.out.println("get:"+key+"|"+((Map)da).get(key));
         if(da instanceof Map){
            return  ((Map)da).get(key);
+        }else{
+            return ReflectionUtils.get(da,key);
         }
-        return null;
+        //return null;
     }
 
     @Override

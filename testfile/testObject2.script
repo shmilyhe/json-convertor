@@ -1,0 +1,11 @@
+# 修改传入的变量
+pojo.name=name|"eric"
+pojo.age=age
+pojo.info.title="manager"
+pojo.info.position="leader"
+# 构告JSON
+.name=pojo.name
+.active=true
+.info.title=pojo.info.title
+.info.abc="test"
+#.info.position=pojo.info.position

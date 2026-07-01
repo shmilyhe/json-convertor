@@ -1,6 +1,6 @@
 print("script2")
 .names[12]="q"
-move(.a,b)
+move(.a,.b)
 tmp=0
 each(.names){ 
     tmp=tmp+1

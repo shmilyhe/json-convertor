@@ -1,0 +1,12 @@
+#DEFINE JSONLINE:{"project":"sim","data":[1,2,4,5]}
+#定义初化的json 初始内容，这个只有VRLExecutor 的execute 方法才会处理DEFINE JSONLINE，#DEFINE JSONLINE的内容请放第一行
+
+//修改 Environment 里的值，可以java 的POJO 
+pojo.name=name|"eric"
+pojo.age=age
+pojo.info.title="manager"
+pojo.info.position="leader"
+pojo.active=true
+//构造JSON 这个是处理完在json
+# 构造JSON
+.staff[0]=pojo
