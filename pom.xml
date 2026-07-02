@@ -4,7 +4,7 @@
 
 	<groupId>io.github.shmilyhe</groupId>
 	<artifactId>json-convert</artifactId>
-	<version>3.1.6</version>
+	<version>3.1.7</version>
 	<packaging>jar</packaging>
 	<description>json-convert</description>
 	<name>io.github.shmilyhe:json-convert</name>
@@ -142,11 +142,10 @@
 					<plugin>
 						<groupId>org.sonatype.central</groupId>
 						<artifactId>central-publishing-maven-plugin</artifactId>
-						<version>0.4.0</version>
+						<version>0.11.0</version>
 						<extensions>true</extensions>
 						<configuration>
 							<publishingServerId>central</publishingServerId>
-							<tokenAuth>true</tokenAuth>   <!-- 使用 token 而非账号密码 -->
 						</configuration>
 					</plugin>
 					<plugin>
